@@ -39,7 +39,7 @@ class AternosAPI():
             parameters['headstart'] = 0
             parameters['SEC'] = self.SEC
             parameters['TOKEN'] = self.TOKEN
-            startserver = requests.get(url=f"https://aternos.org/panel/ajax/start.php", params=parameters, headers=self.headers)
+            requests.get(url=f"https://aternos.org/panel/ajax/start.php", params=parameters, headers=self.headers)
             return "Server Started"
 
     def StopServer(self):
@@ -50,7 +50,7 @@ class AternosAPI():
             parameters = {}
             parameters['SEC'] = self.SEC
             parameters['TOKEN'] = self.TOKEN
-            stopserver = requests.get(url=f"https://aternos.org/panel/ajax/stop.php", params=parameters, headers=self.headers)
+            requests.get(url=f"https://aternos.org/panel/ajax/stop.php", params=parameters, headers=self.headers)
             return "Server Stopped"
 
     def GetServerInfo(self):

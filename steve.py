@@ -4,8 +4,9 @@ from aternosapi import AternosAPI
 
 client = discord.Client()
 
-ATERNOS_SESSION=
-HEADERS = server = AternosAPI(HEADERS, ATERNOS_SESSION)
+ATERNOS_SESSION = os.getenv('ATERNOS_SESSION')
+HEADERS = os.getenv('HEADERS')
+server = AternosAPI(HEADERS, ATERNOS_SESSION)
 
 
 @client.event

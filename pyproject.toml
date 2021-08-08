@@ -8,6 +8,7 @@ authors = ["UrAvgEngineer <<>>"]
 python = "^3.8"
 discord = "^1.7.3"
 selenium = "^3.141.0"
+bs4 = "^0.0.1"
 
 [tool.poetry.dev-dependencies]
 
