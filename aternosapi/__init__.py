@@ -1,8 +1,14 @@
+# Source: https://github.com/Duerocraft/AternosAPI/
+
 import requests
 from bs4 import BeautifulSoup
 
 class AternosAPI():
     def __init__(self, headers, TOKEN):
+        self.proxies = {
+            'https': '45.152.188.244:3128',
+            'http': '45.152.188.244:3128'
+        }
         self.headers = {}
         self.TOKEN = TOKEN
         self.headers['User-Agent'] = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:72.0) Gecko/20100101 Firefox/72.0"
@@ -24,8 +30,9 @@ class AternosAPI():
         exit(1)
 
     def GetStatus(self):
-        webserver = requests.get(url='https://aternos.org/server/', headers=self.headers)
+        webserver = requests.get(url='https://aternos.org/server/', headers=self.headers, proxies=self.proxies)
         webdata = BeautifulSoup(webserver.content, 'html.parser')
+        print(webdata)
         status = webdata.find('span', class_='statuslabel-label').get_text()
         status = status.strip()
         return status
@@ -39,7 +46,8 @@ class AternosAPI():
             parameters['headstart'] = 0
             parameters['SEC'] = self.SEC
             parameters['TOKEN'] = self.TOKEN
-            requests.get(url=f"https://aternos.org/panel/ajax/start.php", params=parameters, headers=self.headers)
+            res = requests.get(url=f"https://aternos.org/panel/ajax/start.php", params=parameters, headers=self.headers, proxies=self.proxies)
+            print(res.text)
             return "Server Started"
 
     def StopServer(self):
@@ -56,6 +64,7 @@ class AternosAPI():
     def GetServerInfo(self):
         ServerInfo = requests.get(url='https://aternos.org/server/', headers=self.headers)
         ServerInfo = BeautifulSoup(ServerInfo.content, 'html.parser')
+        print(ServerInfo)
 
         Software = ServerInfo.find('span', id='software').get_text()
         Software = Software.strip()
